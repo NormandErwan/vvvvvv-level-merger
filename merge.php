@@ -6,19 +6,25 @@ ini_set('display_errors', 1);
 require_once 'model/Data.class.php';
 require_once 'model/Tabs.class.php';
 
-$td = $_GET['td'];
+$td = $_POST['td'];
 
-$levels = Data::loadXML($td);
+//$levels = Data::loadXML($td);
 
+$finalTabs = new Tabs();
+$finalTabs->fillBlank();
 
-$final = new Tabs();
-$final->fillBlank();
-
-
-foreach($levels as $level){
-    $myContent = new Tabs();
-    $myContent->importXML($level['data']);
-    $final->setTab($myContent->getTab(), $level['x'], $level['y']);
+foreach($levels as $level) {
+    $currentTab = new Tabs();
+    $currentTab->importXML($level['data']);
+    $finalTabs->setTab($currentTab->getTab(), $level['x'], $level['y']);
 }
 
-echo $final->toString();
+$finalFile = simplexml_load_file('data/level_layout.vvvvvv');
+$finalFile->Data->contents = $finalTabs->toString();
+
+header('Content-type: text/xml');
+header('Content-Disposition: attachment; filename=VVVVVV_level_merged.vvvvvvv');
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+print($finalFile->asXML());

@@ -105,14 +105,14 @@
 	<h3>Merge levels</h3>
 	<div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form class="form-horizontal" action="upload.php" method="POST">
+            <form class="form-horizontal" action="merge.php" method="POST">
                 <fieldset>
                     <div class="form-group">
                         <label for="td" class="col-lg-2 control-label">Which level group ?</label>
                         <div class="col-lg-10">
                             <select class="form-control" name="td" id="td">
-                                <option>TD 1 (13h15-16h15)</option>
-                                <option>TD 2 (16h30-19h30)</option>
+                                <option>1</option>
+                                <option>2</option>
                             </select>
                         </div>
                     </div>
