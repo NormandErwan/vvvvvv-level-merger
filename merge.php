@@ -20,3 +20,4 @@ var_dump($td);
 Data::saveXML($data, $name, $x, $y, $td);
 echo '<br/>';
 var_dump(Data::loadXML($td));
+

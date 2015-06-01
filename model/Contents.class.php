@@ -27,6 +27,20 @@ class Contents
 		$this->contentsRaw = $xml->Data->contents->__toString();
 		
 		$contents = explode(',', $this->contentsRaw);
+
+        $line = array();
+        $prev_y = 1;
+
+        for($i=0; $i<count($contents); ++$i){
+            $tab_x = (int) floor($i / $this->$tabWidth);
+            $tab_y = (int) floor($i / ($this->$tabwidth * $this->$tabHeight * $this->mapwidth));
+            $line[] = $contents[$i];
+
+            if($prev_y != $tab_y){
+                $this->contents[$tab_x][$tab_y] = $line;
+                $line = array();
+            }
+        }
 	}
 	
 	public function setContents($contents) {
@@ -38,6 +52,6 @@ class Contents
 	}
 	
 	public function getTab($x, $y) {
-		
+
 	}
 }
