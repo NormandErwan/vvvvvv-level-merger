@@ -111,8 +111,8 @@
                         <label for="td" class="col-lg-2 control-label">Which level group ?</label>
                         <div class="col-lg-10">
                             <select class="form-control" name="td" id="td">
-                                <option>1</option>
-                                <option>2</option>
+                                <option>TD 1</option>
+                                <option>TD 2</option>
                             </select>
                         </div>
                     </div>

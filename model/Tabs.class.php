@@ -33,7 +33,6 @@ class Tabs
         for($i=0; $i<count($tabs)-1; ++$i){
             $tab_x = $this->getTabX($i);
             $tab_y = $this->getTabY($i);
-            echo 'TAB INDEX: '.$i.' : '.$tab_x.'|'.$tab_y.'<br/>';
 
             $line[] = (int) $tabs[$i];
 
@@ -104,12 +103,10 @@ class Tabs
     public function toString(){
         $txt = '';
 
-        for($i=1; $i<=5; ++$i){
-            for($j=1; $j<=5; ++$j) {
-                //echo 'TOSTRING, i='.$i.' j='.$j.' LINE COUNT='.count($this->tabs[$i][$j]).'<br/>';
-                foreach($this->tabs[$i][$j] as $l => $line) {
-                    //echo 'BLOCK COUNT = '.count($line).'<br/>';
-                    foreach($line as $b => $block){
+        for($j=1; $j<=5; ++$j){
+            for($l=0; $l<=29; ++$l){
+                for($i=1; $i<=5; ++$i){
+                    foreach($this->tabs[$i][$j][$l] as $b => $block){
                         $txt.= $block.',';
                     }
                 }
@@ -125,7 +122,6 @@ class Tabs
 
     public function getTab(){
         $where = $this->whereIsMyLevelLocated();
-        echo 'WHERE:'.$where['x'].'|'.$where['y'].'<br/>';
         return $this->tabs[$where['x']][$where['y']];
     }
 }
