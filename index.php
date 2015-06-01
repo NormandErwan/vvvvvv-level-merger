@@ -29,9 +29,13 @@
 <div class="container-fluid text-center">
     <h1>VVVVVV Level Merger</h1>
 
-    <p>By Damien Bry & Erwan Normand</p>
+    <p>By <a href="https://twitter.com/Orbmancer" target="_blank" title="See my twitter">Damien Bry</a> & Erwan Normand</p>
 	
 	<br/>
+
+    <p class="text-danger">You must upload a file <strong>ONLY</strong> built on one level like (1,1) or (3,2).</p>
+    <p>The merger automatically recognise where you built that level.</p>
+
 	<br/>
 
 	<h3>Upload a level</h3>
@@ -49,7 +53,7 @@
                         <label for="textArea" class="col-lg-2 control-label">Level content</label>
                         <div class="col-lg-10">
                             <textarea class="form-control" name="data" rows="3" id="textArea"></textarea>
-                            <span class="help-block">The content of your actual level</span>
+                            <span class="help-block">The content of your .vvvvvv file</span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -118,7 +122,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Merge !</button>
+                            <button type="submit" class="btn btn-success">Let the magical merge happen !</button>
                         </div>
                     </div>
                 </fieldset>
