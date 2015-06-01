@@ -41,10 +41,6 @@ class Tabs
         return $this->tabs;
     }
 
-    public function getTab($x, $y) {
-
-    }
-
     public function whereIsMyLevelLocated(){
 
         for($i=1; $i<=5; ++$i) {
@@ -75,6 +71,12 @@ class Tabs
         }
     }
 
+    public function fillBlank(){
+        for($i=1; $i<=5; ++$i)
+            for($j=1; $j<=5; ++$j)
+                $this->fillWithZeros($i, $j);
+    }
+
     public function extractContent($txt){
         $tabs = explode(',', $txt);
         $output = array();
@@ -100,18 +102,14 @@ class Tabs
         return $output;
     }
 
-    public function pushOnlyNonZeros($tab){
+    public function toString(){
         $txt = '';
 
         for($i=1; $i<=5; ++$i){
             for($j=1; $j<=5; ++$i) {
                 foreach($this->contents[$i][$j] as $l => $line) {
                     foreach($line as $b => $block){
-                        if($block != '0'){
-                            $txt.= $block.',';
-                        }else{
-                            $txt.= $tab[$i][$j][$l][$b];
-                        }
+                        $txt.= $block.',';
                     }
                 }
             }
@@ -120,7 +118,7 @@ class Tabs
         return $txt;
     }
 
-    public function merge($txt, $x, $y){
+    /*public function merge($txt, $x, $y){
         $where = $this->whereIsMyLevelLocated();
         $this->contents[$x][$y] = $this->contents[$where['x']][$where['y']];
 
@@ -128,7 +126,18 @@ class Tabs
             $this->fillWithZeros($where['x'], $where['y']);
 
         $tab = $this->extractContent($txt);
+        $txt = $this->pushOnlyNonZeros($tab);
+        unset($tab);
 
-        return $this->pushOnlyNonZeros($tab);
+        return $txt;
+    }*/
+
+    public function setTab($tab, $x, $y){
+        $this->contents[$x][$y] = $tab;
+    }
+
+    public function getTab(){
+        $where = $this->whereIsMyLevelLocated();
+        return $this->contents[$where['x']][$where['y']];
     }
 }

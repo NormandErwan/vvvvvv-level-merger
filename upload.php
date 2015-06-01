@@ -14,14 +14,6 @@ $td = $_POST['td'];
 
 $success = Data::saveXML($data, $name, $x, $y, $td);
 
-$mergedContent = '';
-
-foreach($levels as $level){
-    $myContent = new Tabs();
-    $myContent->importXML($level['content']);
-    $mergedContent = $myContent->merge($mergedContent, $level['x'], $level['y']);
-}
-
 if ($success) {
 	header('Location: index.html');   
 }
