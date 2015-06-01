@@ -17,7 +17,7 @@ $final->fillBlank();
 
 foreach($levels as $level){
     $myContent = new Tabs();
-    $myContent->importXML($level['content']);
+    $myContent->importXML($level['data']);
     $final->setTab($myContent->getTab(), $level['x'], $level['y']);
 }
 
