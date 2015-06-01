@@ -17,8 +17,14 @@ class Data {
             while (false !== ($entry = readdir($handle))) {
 
                 if ($entry != "." && $entry != "..") {
-                    
-                    $output[] = file_get_contents($dir.$entry);
+
+                    $x = substr($entry, 0, 1);
+                    $y = substr($entry, 2, 1);
+                    $output[] = array(
+                        'x' => $x,
+                        'y' => $y,
+                        'content' =>file_get_contents($dir.$entry)
+                    );
                 }
             }
 
