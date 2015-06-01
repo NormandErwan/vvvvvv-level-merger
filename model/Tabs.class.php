@@ -1,20 +1,20 @@
 <?php
 
-class Contents
+class Tabs
 {
 	private static $tabwidth = 40;
 	private static $tabheight = 31;
 	private $mapwidth;
 	private $mapheight;
-	private $contentsRaw;
-	private $contents;
+	private $tabsRaw;
+	private $tabs;
 	
 	public function __construct() {
-		$this->contentsRaw = null;
+		$this->tabsRaw = null;
 		$this->mapwidth = 5;
 		$this->mapheight = 5;
 		
-		$this->contents = array(
+		$this->tabs = array(
 			array(array(), array(), array(), array(), array()),
 			array(array(), array(), array(), array(), array()),
 			array(array(), array(), array(), array(), array()),
@@ -24,31 +24,31 @@ class Contents
 	
 	public function importXML($string) {
 		$xml = simplexml_load_string($string);
-		$this->contentsRaw = $xml->Data->contents->__toString();
+		$this->tabsRaw = $xml->Data->tabs->__toString();
 		
-		$contents = explode(',', $this->contentsRaw);
+		$tabs = explode(',', $this->tabsRaw);
 
         $line = array();
         $prev_y = 1;
 
-        for($i=0; $i<count($contents); ++$i){
+        for($i=0; $i<count($tabs); ++$i){
             $tab_x = (int) floor($i / self::$tabwidth);
             $tab_y = (int) floor($i / (self::$tabwidth * self::$tabheight * $this->mapwidth));
-            $line[] = $contents[$i];
+            $line[] = $tabs[$i];
 
             if($prev_y != $tab_y){
-                $this->contents[$tab_x][$tab_y] = $line;
+                $this->tabs[$tab_x][$tab_y] = $line;
                 $line = array();
             }
         }
 	}
 	
-	public function setContents($contents) {
-		$this->contents = $contents;
+	public function settabs($tabs) {
+		$this->tabs = $tabs;
 	}
 	
-	public function getContents() {
-		return $this->contents;
+	public function gettabs() {
+		return $this->tabs;
 	}
 	
 	public function getTab($x, $y) {

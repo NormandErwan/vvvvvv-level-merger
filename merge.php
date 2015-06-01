@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once 'Data.class.php';
-require_once 'model/Contents.class.php';
+require_once 'model/Tabs.class.php';
 
 $name = $_POST['name'];
 $data = $_POST['data'];
@@ -22,13 +22,13 @@ Data::saveXML($data, $name, $x, $y, $td);
 echo '<br/>';
 
 $levels = Data::loadXML($td);
-$contents[] = array();
+$tabs[] = array();
 var_dump($levels);
 
 foreach($levels as $level){
-    $myContent = new Contents();
+    $myContent = new tabs();
     $myContent->importXML($level['content']);
-    $contents[] = $myContent;
+    $tabs[] = $myContent;
 }
 
 echo '<br/>';

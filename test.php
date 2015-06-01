@@ -1,6 +1,6 @@
 <?php
 
-	include 'model/Contents.class.php';
+	include 'model/Tabs.class.php';
 	
 	$xml = '<?xml version="1.0" ?>
 <MapData version="2">
@@ -429,6 +429,6 @@
 </MapData>';
 
 echo 'coucou';
-$contents = new Contents();
-$contents->importXML($xml);
+$tabs = new Tabs();
+$tabs->importXML($xml);
 //echo 'coucou';
