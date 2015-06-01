@@ -50,15 +50,7 @@ class Tabs
     }
 
     private function getTabY($index){
-        return 1+ (int) floor($index / (self::$tabwidth * $this->mapwidth * self::$tabheight));
-    }
-
-    public function settabs($tabs) {
-        $this->tabs = $tabs;
-    }
-
-    public function gettabs() {
-        return $this->tabs;
+        return 1+(int) floor($index / (self::$tabwidth * $this->mapwidth * self::$tabheight));
     }
 
     public function whereIsMyLevelLocated(){

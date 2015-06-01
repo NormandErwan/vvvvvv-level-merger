@@ -26,6 +26,7 @@ foreach($levels as $level){
 }
 
 // Create the XML file
+/*
 $finalFile = simplexml_load_file('data/level_layout.vvvvvv');
 $finalFile->Data->contents = $finalTabs->toString();
 
@@ -36,3 +37,4 @@ header('Expires: 0');
 header('Cache-Control: must-revalidate');
 header('Pragma: public');
 print($finalFile->asXML());
+*/
