@@ -31,10 +31,10 @@ class Tabs
         $line = array();
         $prev_y = 1;
 
-        for($i=0; $i<count($contents); ++$i){
+        for($i=0; $i<count($tabs); ++$i){
             $tab_x = $this->getTabX($i);
             $tab_y = $this->getTabY($i);
-            $line[] = $contents[$i];
+            $line[] = $tabs[$i];
 
             if($prev_y != $tab_y){
                 /*echo '<br/>LINE '.count($this->contents[$tab_x][$tab_y]).'<br/>';
