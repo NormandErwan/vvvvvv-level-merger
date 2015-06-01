@@ -3,7 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require 'Data.class.php';
+require_once 'Data.class.php';
+require_once 'model/Contents.class.php';
 
 $name = $_POST['name'];
 $data = $_POST['data'];
@@ -19,5 +20,21 @@ var_dump($td);
 
 Data::saveXML($data, $name, $x, $y, $td);
 echo '<br/>';
-var_dump(Data::loadXML($td));
 
+$levels = Data::loadXML($td);
+$contents[] = array();
+var_dump($levels);
+
+foreach($levels as $level){
+    $myContent = new Contents();
+    $myContent->importXML($level['content']);
+    $contents[] = $myContent;
+}
+
+echo '<br/>';
+echo '<br/>';
+echo '<br/>';
+echo '<br/>';
+var_dump($levels);
+
+//Merge $levels

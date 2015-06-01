@@ -32,8 +32,8 @@ class Contents
         $prev_y = 1;
 
         for($i=0; $i<count($contents); ++$i){
-            $tab_x = (int) floor($i / $this->$tabWidth);
-            $tab_y = (int) floor($i / ($this->$tabwidth * $this->$tabHeight * $this->mapwidth));
+            $tab_x = (int) floor($i / self::$tabwidth);
+            $tab_y = (int) floor($i / (self::$tabwidth * self::$tabheight * $this->mapwidth));
             $line[] = $contents[$i];
 
             if($prev_y != $tab_y){
