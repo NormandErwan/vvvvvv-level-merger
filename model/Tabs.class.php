@@ -8,6 +8,7 @@ class Tabs
     private $mapheight;
     private $tabsRaw;
     private $tabs;
+    private $edEntities;
 
     public function __construct() {
         $this->tabsRaw = null;
@@ -19,12 +20,18 @@ class Tabs
         for($i=1; $i<=5; ++$i)
             for($j=1; $j<=5; ++$j)
                 $this->tabs[$i][$j] = array();
+
     }
 
     public function importXML($string) {
         $xml = simplexml_load_string($string);
 
         $this->tabsRaw = $xml->Data->contents->__toString();
+        $this->edEntities = $xml->Data->edEntities->children();
+        /*foreach($this->edEntities as $k => $v) {
+            var_dump($v);
+            echo '<br/>';
+        }*/
 
         $tabs = explode(',', $this->tabsRaw);
 
@@ -98,6 +105,9 @@ class Tabs
         for($i=1; $i<=5; ++$i)
             for($j=1; $j<=5; ++$j)
                 $this->fillWithZeros($i, $j);
+
+
+        $this->edEntities = simplexml_load_string('<edEntities></edEntities>');
     }
 
     public function toString(){
@@ -113,15 +123,46 @@ class Tabs
             }
         }
 
-        return $txt;
+        return array(
+            'content' => $txt,
+            'edEntities' => $this->edEntities
+        );
     }
 
-    public function setTab($tab, $x, $y){
-        $this->tabs[$x][$y] = $tab;
+    public function setTab($data, $x, $y){
+        $this->tabs[$x][$y] = $data['content'];
+
+        //var_dump($data['edEntities']);
+
+        if(!empty($data['edEntities']))
+            foreach($data['edEntities'] as $key => $value){
+                //echo 'EDIT:'.$value.'<br/>';
+                $child = $this->edEntities->addChild('edentity', $value);
+
+                foreach($value->attributes() as $k => $v){
+                    $newval = $v;
+                    if($k == 'x') {
+                        $newval = ((int)$v) - 40 * ($data['from_x'] - $x);
+                        //echo 'ancient: '.$v.' new_x:'.$newval.' from='.$data['from_x'].' x='.$x.'<br/>';
+                    }
+                    if($k == 'y') {
+                        $newval = ((int)$v) - 30 * ($data['from_y'] - $y);
+                        //echo 'ancient: '.$v.' new_y:'.$newval.' from='.$data['from_y'].' y='.$y.'<br/>';
+                    }
+
+                    $child->addAttribute($k, $newval);
+                }
+            }
     }
 
     public function getTab(){
         $where = $this->whereIsMyLevelLocated();
-        return $this->tabs[$where['x']][$where['y']];
+
+        return array(
+            'content' => $this->tabs[$where['x']][$where['y']],
+            'edEntities' => $this->edEntities,
+            'from_x' => $where['x'],
+            'from_y' => $where['y']
+        );
     }
 }

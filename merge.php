@@ -20,9 +20,23 @@ foreach($levels as $level){
     $finalTabs->setTab($myContent->getTab(), $level['x'], $level['y']);
 }
 
+$rawExport = $finalTabs->toString();
+
 // Create the XML file
 $finalFile = simplexml_load_file('data/level_layout.vvvvvv');
-$finalFile->Data->contents = $finalTabs->toString();
+$finalFile->Data->contents = $rawExport['content'];
+
+
+//$finalFile->Data->edEntities = $rawExport['edEntities']; //doesn't work
+
+if(!empty($rawExport['edEntities']))
+    foreach($rawExport['edEntities'] as $key => $value){
+        $child = $finalFile->Data->edEntities->addChild('edentity', $value);
+
+        foreach($value->attributes() as $k => $v){
+            $child->addAttribute($k, $v);
+        }
+    }
 
 $dom_sxe = dom_import_simplexml($finalFile);
 if (!$dom_sxe) {
