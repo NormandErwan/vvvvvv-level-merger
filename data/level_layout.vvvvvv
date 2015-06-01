@@ -17,34 +17,7 @@
         <mapheight>5</mapheight>
         <levmusic>0</levmusic>
         <contents></contents>
-		<edEntities>
-            <edentity x="15" y="1" t="2" p1="3" p2="0" p3="0" p4="0" p5="320" p6="240">Facility
-            </edentity>
-            <edentity x="15" y="2" t="2" p1="2" p2="0" p3="0" p4="0" p5="320" p6="240">Test Chamber #1
-            </edentity>
-            <edentity x="6" y="12" t="1" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">Tantilizing Trinkets
-            </edentity>
-            <edentity x="9" y="5" t="1" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">EVERYTHING.
-            </edentity>
-            <edentity x="14" y="12" t="1" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">in this room. You think
-            </edentity>
-            <edentity x="3" y="7" t="10" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">opengate1
-            </edentity>
-            <edentity x="29" y="9" t="1" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">
-            </edentity>
-            <edentity x="26" y="5" t="1" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">
-            </edentity>
-            <edentity x="23" y="12" t="1" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">
-            </edentity>
-            <edentity x="20" y="6" t="1" p1="0" p2="0" p3="0" p4="0" p5="320" p6="240">
-            </edentity>
-            <edentity x="18" y="13" t="10" p1="1" p2="0" p3="0" p4="0" p5="320" p6="240">
-            </edentity>
-            <edentity x="17" y="28" t="2" p1="2" p2="0" p3="0" p4="0" p5="320" p6="240">
-            </edentity>
-            <edentity x="30" y="17" t="2" p1="2" p2="0" p3="0" p4="0" p5="320" p6="240">
-            </edentity>
-        </edEntities>
+		<edEntities></edEntities>
         <levelMetaData>
             <edLevelClass tileset="0" tilecol="4" platx1="0" platy1="0" platx2="320" platy2="240" platv="4" enemyx1="0" enemyy1="0" enemyx2="320" enemyy2="240" enemytype="0" directmode="0" warpdir="0"></edLevelClass>
             <edLevelClass tileset="0" tilecol="1" platx1="0" platy1="0" platx2="320" platy2="240" platv="4" enemyx1="0" enemyy1="0" enemyx2="320" enemyy2="240" enemytype="0" directmode="0" warpdir="0"></edLevelClass>

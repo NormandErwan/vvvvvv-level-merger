@@ -14,8 +14,6 @@ $levels = Data::loadXML($td);
 $finalTabs = new Tabs();
 $finalTabs->fillBlank();
 
-var_dump($levels);
-
 foreach($levels as $level){
     $myContent = new Tabs();
     $myContent->importXML($level['data']);
@@ -26,10 +24,20 @@ foreach($levels as $level){
 $finalFile = simplexml_load_file('data/level_layout.vvvvvv');
 $finalFile->Data->contents = $finalTabs->toString();
 
+$dom_sxe = dom_import_simplexml($finalFile);
+if (!$dom_sxe) {
+    echo 'Erreur lors de la conversion du XML';
+    exit;
+}
+
+$dom = new DOMDocument('1.0');
+$dom_sxe = $dom->importNode($dom_sxe, true);
+$dom_sxe = $dom->appendChild($dom_sxe);
+
 // Download the XML file
 header('Content-type: text/xml');
-header('Content-Disposition: attachment; filename=VVVVVV_level_merged.vvvvvvv');
+header('Content-Disposition: attachment; filename=VVVVVV_level_merged.vvvvvv');
 header('Expires: 0');
 header('Cache-Control: must-revalidate');
 header('Pragma: public');
-print($finalFile->asXML());
+print($dom->saveXML(null, LIBXML_NOEMPTYTAG));
