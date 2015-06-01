@@ -30,7 +30,7 @@
 <br/>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form class="form-horizontal" action="merge.php" method="POST">
+            <form class="form-horizontal" action="upload.php" method="POST">
                 <fieldset>
                     <div class="form-group">
                         <label for="inputName" class="col-lg-2 control-label">Level name</label>
@@ -65,7 +65,8 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Where to put the level ?</label>
                         <div class="col-lg-5">
-                            <select class="form-control" name="x">
+							<label for="x" class="">X</label>
+                            <select class="form-control" name="x" id="x">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -74,7 +75,8 @@
                             </select>
                         </div>
                         <div class="col-lg-5">
-                            <select class="form-control" name="y">
+							<label for="y" class="">Y</label>
+                            <select class="form-control" name="y" id="y">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
