@@ -136,6 +136,7 @@
                     <th>Level name</th>
                     <th>X</th>
                     <th>Y</th>
+					<th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -147,6 +148,9 @@
 							<td><?php echo $level['name']; ?></td>
 							<td><?php echo $level['x']; ?></td>
 							<td><?php echo $level['y']; ?></td>
+							<td>
+								<a style="color: red; text-decoration: none;" href="delete.php?name=<?php echo $level['name']; ?>&x=<?php echo $level['x']; ?>&y=<?php echo $level['y']; ?>&td=<?php echo $td; ?>">✘</a>
+							</td>
 						</tr>
 					<?php } 
 					} ?>
