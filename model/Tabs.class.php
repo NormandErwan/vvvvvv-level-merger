@@ -3,7 +3,7 @@
 class Tabs
 {
     private static $tabwidth = 40;
-    private static $tabheight = 31;
+    private static $tabheight = 30;
     private $mapwidth;
     private $mapheight;
     private $tabsRaw;
@@ -14,11 +14,11 @@ class Tabs
         $this->mapwidth = 5;
         $this->mapheight = 5;
 
-        $this->contents = array();
+        $this->tabs = array();
 
         for($i=1; $i<=5; ++$i)
             for($j=1; $j<=5; ++$j)
-                $this->contents[$i][$j] = array();
+                $this->tabs[$i][$j] = array();
     }
 
     public function importXML($string) {
@@ -31,25 +31,26 @@ class Tabs
         $line = array();
         $prev_y = 1;
 
-        for($i=0; $i<count($tabs); ++$i){
+        for($i=0; $i<count($tabs)-1; ++$i){
             $tab_x = $this->getTabX($i);
             $tab_y = $this->getTabY($i);
+            echo 'TAB INDEX: '.$i.' : '.$tab_x.'|'.$tab_y.'<br/>';
             $line[] = (int) $tabs[$i];
 
 
             if($prev_y != $tab_y){
-                $this->contents[$tab_x][$tab_y][] = $line;
+                $this->tabs[$tab_x][$tab_y][] = $line;
                 $line = array();
             }
         }
     }
 
     private function getTabX($index){
-        return (int) floor($index / self::$tabwidth) % 5 +1;
+        return 1+(int) (floor($index / self::$tabwidth) % 5);
     }
 
     private function getTabY($index){
-        return (int) floor($index / (self::$tabwidth * $this->mapwidth * self::$tabheight)) +1;
+        return 1+ (int) floor($index / (self::$tabwidth * $this->mapwidth * self::$tabheight));
     }
 
     public function settabs($tabs) {
@@ -67,14 +68,15 @@ class Tabs
 
         for($i=1; $i<=5; ++$i) {
             for ($j = 1; $j <= 5; ++$j) {
-                foreach($this->contents[$i][$j] as $line) {
+                foreach($this->tabs[$i][$j] as $line) {
                     foreach($line as $block){
                         if($block != 0){
                             $x = $i;
                             $y = $j;
                             $exit = true;
-                            break;
                         }
+                        if($exit)
+                            break;
                     }
                     if($exit)
                         break;
@@ -98,7 +100,7 @@ class Tabs
             for($i=0; $i<self::$tabwidth; ++$i){
                 $line[] = 0;
             }
-            $this->contents[$x][$y][] = $line;
+            $this->tabs[$x][$y][] = $line;
         }
     }
 
@@ -113,7 +115,7 @@ class Tabs
 
         for($i=1; $i<=5; ++$i){
             for($j=1; $j<=5; ++$j) {
-                foreach($this->contents[$i][$j] as $l => $line) {
+                foreach($this->tabs[$i][$j] as $l => $line) {
                     foreach($line as $b => $block){
                         $txt.= $block.',';
                     }
@@ -125,11 +127,12 @@ class Tabs
     }
 
     public function setTab($tab, $x, $y){
-        $this->contents[$x][$y] = $tab;
+        $this->tabs[$x][$y] = $tab;
     }
 
     public function getTab(){
         $where = $this->whereIsMyLevelLocated();
-        return $this->contents[$where['x']][$where['y']];
+        echo 'WHERE:'.$where['x'].'|'.$where['y'].'<br/>';
+        return $this->tabs[$where['x']][$where['y']];
     }
 }

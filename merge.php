@@ -19,6 +19,7 @@ foreach($levels as $level){
     $myContent = new Tabs();
     $myContent->importXML($level['data']);
     $final->setTab($myContent->getTab(), $level['x'], $level['y']);
+    unset($myContent);
 }
 
 echo $final->toString();
