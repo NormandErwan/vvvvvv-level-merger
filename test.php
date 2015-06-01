@@ -431,4 +431,4 @@
 echo 'coucou';
 $contents = new Contents();
 $contents->importXML($xml);
-echo 'coucou';
+//echo 'coucou';
