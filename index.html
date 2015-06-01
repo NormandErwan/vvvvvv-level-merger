@@ -30,19 +30,19 @@
 <br/>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="merge.php" method="POST">
                 <fieldset>
                     <div class="form-group">
                         <label for="inputName" class="col-lg-2 control-label">Level name</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Level Name">
+                            <input type="text" class="form-control" name="name" id="inputName" placeholder="Level Name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="textArea" class="col-lg-2 control-label">Level content</label>
                         <div class="col-lg-10">
-                            <textarea class="form-control" rows="3" id="textArea"></textarea>
-                            <span class="help-block">The content of</span>
+                            <textarea class="form-control" name="data" rows="3" id="textArea"></textarea>
+                            <span class="help-block">The content of your actual level</span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,13 +50,13 @@
                         <div class="col-lg-10">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+                                    <input type="radio" name="td" id="optionsRadios1" value="1" checked="">
                                     TD 13h15-16h15
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                    <input type="radio" name="td" id="optionsRadios2" value="2">
                                     TD 16h30-19h30
                                 </label>
                             </div>
@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Where to put the level ?</label>
                         <div class="col-lg-5">
-                            <select class="form-control" id="x">
+                            <select class="form-control" name="x">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -74,7 +74,7 @@
                             </select>
                         </div>
                         <div class="col-lg-5">
-                            <select class="form-control" id="y">
+                            <select class="form-control" name="y">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
