@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 require_once 'model/Data.class.php';
 require_once 'model/Tabs.class.php';
 
-$td = $_POST['td'];
+$td = $_GET['td'];
 
 $levels = Data::loadXML($td);
 
@@ -20,10 +20,12 @@ $final->fillBlank();
 foreach($levels as $level){
     $myContent = new Tabs();
     $myContent->importXML($level['data']);
-    $final->setTab($myContent->getTab(), $level['x'], $level['y']);
+    echo '<br/>'.$myContent->toString();
+    //$final->setTab($myContent->getTab(), $level['x'], $level['y']);
     unset($myContent);
-
+    break;
 }
+//echo '<br/>'.$final->toString();
 
 // Create the XML file
 /*

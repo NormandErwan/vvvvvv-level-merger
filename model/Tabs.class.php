@@ -29,16 +29,15 @@ class Tabs
         $tabs = explode(',', $this->tabsRaw);
 
         $line = array();
-        $prev_y = 1;
 
         for($i=0; $i<count($tabs)-1; ++$i){
             $tab_x = $this->getTabX($i);
             $tab_y = $this->getTabY($i);
             echo 'TAB INDEX: '.$i.' : '.$tab_x.'|'.$tab_y.'<br/>';
+
             $line[] = (int) $tabs[$i];
 
-
-            if($prev_y != $tab_y){
+            if(count($line) == 40){
                 $this->tabs[$tab_x][$tab_y][] = $line;
                 $line = array();
             }
@@ -107,7 +106,9 @@ class Tabs
 
         for($i=1; $i<=5; ++$i){
             for($j=1; $j<=5; ++$j) {
+                //echo 'TOSTRING, i='.$i.' j='.$j.' LINE COUNT='.count($this->tabs[$i][$j]).'<br/>';
                 foreach($this->tabs[$i][$j] as $l => $line) {
+                    //echo 'BLOCK COUNT = '.count($line).'<br/>';
                     foreach($line as $b => $block){
                         $txt.= $block.',';
                     }
