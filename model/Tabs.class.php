@@ -16,13 +16,32 @@ class Tabs
 
         $this->contents = array();
 
+        for($i=1; $i<=5; ++$i)
+            for($j=1; $j<=5; ++$j)
+                $this->contents[$i][$j] = array();
     }
 
     public function importXML($string) {
         $xml = simplexml_load_string($string);
-        $this->tabsRaw = $xml->Data->tabs->__toString();
 
-        $this->contents = $this->extractContent($this->tabsRaw);
+        $this->tabsRaw = $xml->Data->contents->__toString();
+
+        $tabs = explode(',', $this->tabsRaw);
+
+        $line = array();
+        $prev_y = 1;
+
+        for($i=0; $i<count($tabs); ++$i){
+            $tab_x = $this->getTabX($i);
+            $tab_y = $this->getTabY($i);
+            $line[] = (int) $tabs[$i];
+
+
+            if($prev_y != $tab_y){
+                $this->contents[$tab_x][$tab_y][] = $line;
+                $line = array();
+            }
+        }
     }
 
     private function getTabX($index){
@@ -42,30 +61,42 @@ class Tabs
     }
 
     public function whereIsMyLevelLocated(){
+        $x = 0;
+        $y = 0;
+        $exit = false;
 
         for($i=1; $i<=5; ++$i) {
             for ($j = 1; $j <= 5; ++$j) {
                 foreach($this->contents[$i][$j] as $line) {
                     foreach($line as $block){
-                        if($block != '0'){
-                            return array(
-                                'x' => $i,
-                                'y' => $j
-                            );
+                        if($block != 0){
+                            $x = $i;
+                            $y = $j;
+                            $exit = true;
+                            break;
                         }
                     }
+                    if($exit)
+                        break;
                 }
+                if($exit)
+                    break;
             }
+            if($exit)
+                break;
         }
 
-        return array();
+        return array(
+            'x' => $x,
+            'y' => $y
+        );
     }
 
     public function fillWithZeros($x, $y){
-        for($j=0; $j<self::$tabheight; +$j){
+        for($j=0; $j<self::$tabheight; ++$j){
             $line = array();
             for($i=0; $i<self::$tabwidth; ++$i){
-                $line[] = '0';
+                $line[] = 0;
             }
             $this->contents[$x][$y][] = $line;
         }
@@ -77,36 +108,11 @@ class Tabs
                 $this->fillWithZeros($i, $j);
     }
 
-    public function extractContent($txt){
-        $tabs = explode(',', $txt);
-        $output = array();
-
-        for($i=1; $i<=5; ++$i)
-            for($j=1; $j<=5; ++$j)
-                $output[$i][$j] = array();
-
-        $line = array();
-        $prev_y = 1;
-
-        for($i=0; $i<count($tabs); ++$i){
-            $tab_x = $this->getTabX($i);
-            $tab_y = $this->getTabY($i);
-            $line[] = $tabs[$i];
-
-            if($prev_y != $tab_y){
-                $output[$tab_x][$tab_y][] = $line;
-                $line = array();
-            }
-        }
-
-        return $output;
-    }
-
     public function toString(){
         $txt = '';
 
         for($i=1; $i<=5; ++$i){
-            for($j=1; $j<=5; ++$i) {
+            for($j=1; $j<=5; ++$j) {
                 foreach($this->contents[$i][$j] as $l => $line) {
                     foreach($line as $b => $block){
                         $txt.= $block.',';
@@ -117,20 +123,6 @@ class Tabs
 
         return $txt;
     }
-
-    /*public function merge($txt, $x, $y){
-        $where = $this->whereIsMyLevelLocated();
-        $this->contents[$x][$y] = $this->contents[$where['x']][$where['y']];
-
-        if($where['x'] != $x || $where['y'] != $y)
-            $this->fillWithZeros($where['x'], $where['y']);
-
-        $tab = $this->extractContent($txt);
-        $txt = $this->pushOnlyNonZeros($tab);
-        unset($tab);
-
-        return $txt;
-    }*/
 
     public function setTab($tab, $x, $y){
         $this->contents[$x][$y] = $tab;
