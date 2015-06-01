@@ -1,3 +1,7 @@
+<?php
+	include 'model/Data.class.php';
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -101,17 +105,23 @@
                 <tr>
                     <th>TD</th>
                     <th>Level name</th>
+                    <th>X</th>
+                    <th>Y</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Column content</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Column content</td>
-                </tr>
+					<?php
+					for ($td = 1; $td <= 2; $td++) { 
+						foreach (Data::loadXML($td) as $level) { ?>
+						<tr>
+							<td><?php echo $td; ?></td>
+							<td><?php echo $level['name']; ?></td>
+							<td><?php echo $level['x']; ?></td>
+							<td><?php echo $level['y']; ?></td>
+						</tr>
+					<?php } 
+					} ?>
+				</tbody>
             </table>
         </div>
     </div>
