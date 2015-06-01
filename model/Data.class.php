@@ -3,9 +3,11 @@
 class Data {
 
     public static function saveXML($data, $name, $x, $y, $TD = 1){
-        if(file_put_contents('data/td'.$TD.'/'.$x.'_'.$y.'-'.$name.'.vvvvvv', $data)){
-            echo 'Okay man !';
+		$file = 'data/td'.$TD.'/'.$x.'_'.$y.'-'.$name.'.vvvvvv';
+        if (!file_put_contents($file, $data)) {
+             trigger_error('Cannot save the vvvvvv file : ' . $file, E_USER_ERROR);
         }
+		return true;
     }
 
     public static function loadXML($TD){
