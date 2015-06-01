@@ -27,11 +27,14 @@
 
 <!-- Add your site or application content here -->
 <div class="container-fluid text-center">
-    <h2>VVVVVV Level Merger</h2>
+    <h1>VVVVVV Level Merger</h1>
 
     <p>By Damien Bry & Erwan Normand</p>
-<br/>
-<br/>
+	
+	<br/>
+	<br/>
+
+	<h3>Upload a level</h3>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form class="form-horizontal" action="upload.php" method="POST">
@@ -55,13 +58,13 @@
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="td" id="optionsRadios1" value="1" checked="">
-                                    TD 13h15-16h15
+                                    TD 1 (13h15-16h15)
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="td" id="optionsRadios2" value="2">
-                                    TD 16h30-19h30
+                                    TD 2 (16h30-19h30)
                                 </label>
                             </div>
                         </div>
@@ -98,6 +101,32 @@
             </form>
         </div>
     </div>
+	
+	<h3>Merge levels</h3>
+	<div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="form-horizontal" action="upload.php" method="POST">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="td" class="col-lg-2 control-label">Which level group ?</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" name="td" id="td">
+                                <option>TD 1 (13h15-16h15)</option>
+                                <option>TD 2 (16h30-19h30)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">Merge !</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+	
+	<h3>Uploaded levels</h3>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <table class="table table-striped table-hover">
